@@ -11,54 +11,76 @@
 </head>
 
 <body>
-	<p id="credits"> Diese Seite wurde erstellt von: David, Lukas, Timo</p>
-	<h2 id="zeiteingabeText">Bitte gib deine Zeiten an!</h2>
-    <div id="Texte">
-    <p id="Morgen-eingestempelt">Wann hast du am Morgen eingestempelt?</p>
-<div class="Inputs">
-    <input type="number" id="inputStunden" placeholder="Stunden">
-    <input type="number" id="inputMinuten" placeholder="Minuten">
-</div>
+     <div class="container">
+	 <p id="credits"> Diese Seite wurde erstellt von: David, Lukas, Timo</p>
 
-<p id="Mittagsdauer">Wie lange hast du Mittag gemacht?</p>
-<div class="Inputs">
-    <input type="number" id="inputMittag" placeholder="Minuten">
-    <button id="knopf" onclick="calcTime()">Berechnen</button>
-</div>
-    <div id="resDiv">
-        <p id="deinResIst">Du kannst um diese Zeit nach Hause gehen:</p>
-        <p id="res">00:00</p>
+        <h2 id="zeiteingabeText">Zeitberechner</h2>
+
+		<p id="tagessolStundenP">Tägliche Arbeitszeit?</p>
+        <div class="Inputs">
+            <input type="number" id="tagessolStunden" placeholder="Stunden">
+            <input type="number" id="tagessolMinuten" placeholder="Minuten">
+        </div>
+
+        <p id="Morgen-eingestempelt">Wann hast du am Morgen eingestempelt?</p>
+        <div class="Inputs">
+            <input type="number" id="inputStunden" placeholder="Stunden">
+            <input type="number" id="inputMinuten" placeholder="Minuten">
+        </div>
+
+        <p id="Mittagsdauer">Wie lange hast du Mittag gemacht?</p>
+        <div class="Inputs">
+            <input type="number" id="inputMittag" placeholder="Minuten">
+            <button id="knopf" onclick="calcTime()">Berechnen</button>
+        </div>
+
+        <div id="resDiv">
+            <p id="deinResIst">Du kannst um diese Zeit nach Hause gehen:</p>
+            <p id="res">00:00</p>
+        </div>
     </div>
+
 
     <script>
         function calcTime() {
-        var stunden = parseInt(document.getElementById("inputStunden").value);
-        var minuten = parseInt(document.getElementById("inputMinuten").value);
-        var dauertMittag = parseInt(document.getElementById("inputMittag").value);
+            var tagessolStunden = parseInt(document.getElementById("tagessolStunden").value);
+            var tagessolMinuten = parseInt(document.getElementById("tagessolMinuten").value);
+            var stunden = parseInt(document.getElementById("inputStunden").value);
+            var minuten = parseInt(document.getElementById("inputMinuten").value);
+            var dauertMittag = parseInt(document.getElementById("inputMittag").value);
 
-        // Überprüfung der Minuten auf maximal 59
-        if (minuten >= 60) {
-            alert("Bitte gib gültige Minuten (0 bis 59) ein.");
-            return;
+            // Überprüfung der Minuten auf maximal 59
+            if (minuten >= 60 || tagessolMinuten >= 60) {
+                alert("Bitte gib gültige Minuten (0 bis 59) ein.");
+                return;
+            }
+
+            var arbeitszeitMinuten = (tagessolStunden * 60) + tagessolMinuten; // Tägliche Arbeitszeit in Minuten
+            var mittagspauseMinuten = dauertMittag;
+
+            var gesamtMinuten = arbeitszeitMinuten + mittagspauseMinuten;
+
+            var schlussH = Math.floor(stunden + (gesamtMinuten / 60));
+            var schlussM = Math.floor(minuten + (gesamtMinuten % 60));
+
+            if (schlussM >= 60) {
+                schlussM -= 60;
+                schlussH += 1;
+            }
+
+            var endZeit = schlussH.toString().padStart(2, '0') + ":" + schlussM.toString().padStart(2, '0');
+
+            document.getElementById("res").innerHTML = endZeit;
         }
-
-        var arbeitszeitMinuten = (8 * 60) + 12; // Gesamte Arbeitszeit in Minuten
-        var mittagspauseMinuten = dauertMittag;
-
-        var gesamtMinuten = arbeitszeitMinuten + mittagspauseMinuten;
-
-        var schlussH = Math.floor(stunden + (gesamtMinuten / 60));
-        var schlussM = Math.floor(minuten + (gesamtMinuten % 60));
-
-        if (schlussM >= 60) {
-            schlussM -= 60;
-            schlussH += 1;
-        }
-
-        var endZeit = schlussH.toString().padStart(2, '0') + ":" + schlussM.toString().padStart(2, '0');
-
-        document.getElementById("res").innerHTML = endZeit;
-    }
     </script>
 </body>
+
+</html>
+
+
+
+
+    </script>
+</body>
+
 </html>

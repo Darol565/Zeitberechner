@@ -1,36 +1,51 @@
 /* Globale Stile */
+/* Globale Stile */
 body {
     font-family: 'Muli', sans-serif;
     background-color: #f5f5f5;
     margin: 0;
     padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
 #Texte {
     text-align: center;
-    margin-top: 50px;
+	display: flex;
+    justify-content: center;
 }
 
-
-#zeiteingabeText {
-    text-align: center;
-    margin-top: 50px;
-	font-size: 2.8rem;
-	margin-bottom: 200px;
-	
-}
 #credits  {
     text-align: center;
-    margin-top: 50px;
+    margin-top: -70px;
+	margin-bottom: -70px;
 }
 
-/* Überschriften */
+#zeiteingabeText {
+    font-size: 2.9rem;
+    margin-bottom: 60px;
+	margin-top: -90px;
+	display: flex;
+    justify-content: center;
+}
 
+#credits {
+    text-align: center;
+}
+
+
+
+/* Überschriften */
+#tagessolStundenP,
 #Morgen-eingestempelt,
 #Mittagsdauer,
 #deinResIst {
     font-size: 1.5rem;
     margin-bottom: 40px;
+	display: flex;
+    justify-content: center;
 }
 
 /* Eingabefelder */
@@ -38,10 +53,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap; /* Neue Zeile hinzugefügt */
     margin-bottom: 20px;
-	outline: none;
+    outline: none;
     border-color: #BE3E82;
-
 }
 
 input[type="number"],
@@ -50,6 +65,8 @@ button {
     border: none;
     border-radius: 5px;
     font-size: 1rem;
+    margin-right: 10px; /* Abstand zwischen den Inputs und dem Button */
+    margin-bottom: 10px;
 }
 
 input[type="number"] {
@@ -72,10 +89,7 @@ button:hover {
     text-align: center;
     margin-top: 20px;
     padding: 20px;
-    background-color: #fff;
-    /* Ergebnisbereich border-radius: 5px;
-    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
-	*/
+	
 }
 
 #res {
@@ -89,9 +103,57 @@ button:hover {
         flex-direction: column;
     }
 
-    input[type="number"],
-    button {
-        width: 100%;
-        margin-bottom: 10px;
+    /* Weitere Stile für Mobilgeräte hinzufügen */
+    #zeiteingabeText {
+        font-size: 2rem;
+        margin-bottom: 20px;
+		
+    }
+
+    #Morgen-eingestempelt,
+    #Mittagsdauer,
+    #deinResIst {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
     }
 }
+
+@media (max-width: 576px) {
+    /* Kleine Handys */
+    #zeiteingabeText {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+		
+    }
+
+    #Morgen-eingestempelt,
+    #Mittagsdauer,
+    #deinResIst {
+        font-size: 1rem;
+        margin-bottom: 15px;
+    }
+
+    input[type="number"],
+    button {
+        font-size: 0.9rem;
+    }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+    /* Mittlere Handys und kleinere Tablets */
+    #zeiteingabeText {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+
+    #Morgen-eingestempelt,
+    #Mittagsdauer,
+    #deinResIst {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+    }
+}
+
+
+
+
