@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Zeitberechner Bbc</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+	<h2 id="zeiteingabeText">Bitte gib deine Zeiten an!</h2>
+    <div id="Texte">
+    <p id="Morgen-eingestempelt">Wann hast du am Morgen eingestempelt?</p>
+<div class="Inputs">
+    <input type="number" id="inputStunden" placeholder="Stunden">
+    <input type="number" id="inputMinuten" placeholder="Minuten">
+</div>
+
+<p id="Mittagsdauer">Wie lange hast du Mittag gemacht?</p>
+<div class="Inputs">
+    <input type="number" id="inputMittag" placeholder="Minuten">
+    <button id="knopf" onclick="calcTime()">Berechnen</button>
+</div>
+    <div id="resDiv">
+        <p id="deinResIst">Du kannst um diese Zeit nach Hause gehen:</p>
+        <p id="res">00:00</p>
+    </div>
+
+    <script>
+        function calcTime() {
+        var stunden = parseInt(document.getElementById("inputStunden").value);
+        var minuten = parseInt(document.getElementById("inputMinuten").value);
+        var dauertMittag = parseInt(document.getElementById("inputMittag").value);
+
+        // Überprüfung der Minuten auf maximal 59
+        if (minuten >= 60) {
+            alert("Bitte gib gültige Minuten (0 bis 59) ein.");
+            return;
+        }
+
+        var arbeitszeitMinuten = (8 * 60) + 12; // Gesamte Arbeitszeit in Minuten
+        var mittagspauseMinuten = dauertMittag;
+
+        var gesamtMinuten = arbeitszeitMinuten + mittagspauseMinuten;
+
+        var schlussH = Math.floor(stunden + (gesamtMinuten / 60));
+        var schlussM = Math.floor(minuten + (gesamtMinuten % 60));
+
+        if (schlussM >= 60) {
+            schlussM -= 60;
+            schlussH += 1;
+        }
+
+        var endZeit = schlussH.toString().padStart(2, '0') + ":" + schlussM.toString().padStart(2, '0');
+
+        document.getElementById("res").innerHTML = endZeit;
+    }
+    </script>
+</body>
+</html>
